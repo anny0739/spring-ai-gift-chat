@@ -1,4 +1,4 @@
-package study;
+package study.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;

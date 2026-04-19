@@ -1,0 +1,16 @@
+### 선물 추천 요청
+POST http://localhost:8080/api/chat
+Content-Type: application/json
+
+{
+    "message": "친구 생일 선물 추천해 줘",
+    "sessionId": "550e8400-e29b-41d4-a716-446655440000"
+}
+
+### sessionId 없이 요청
+POST http://localhost:8080/api/chat
+Content-Type: application/json
+
+{
+    "message": "부모님 결혼기념일 선물 추천해 줘"
+}
