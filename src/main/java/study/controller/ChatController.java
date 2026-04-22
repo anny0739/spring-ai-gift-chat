@@ -8,7 +8,7 @@ import study.dto.ChatRequest;
 import study.dto.ChatResponse;
 import study.service.ChatService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RequestMapping("/api/chat")
 @RestController
