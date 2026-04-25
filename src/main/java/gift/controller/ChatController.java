@@ -8,7 +8,7 @@ import gift.dto.ChatRequest;
 import gift.dto.ChatResponse;
 import gift.service.ChatService;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RequestMapping("/api/chat")
 @RestController
