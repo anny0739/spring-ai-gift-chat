@@ -1,12 +1,12 @@
-package study.controller;
+package gift.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import study.dto.ChatRequest;
-import study.dto.ChatResponse;
-import study.service.ChatService;
+import gift.dto.ChatRequest;
+import gift.dto.ChatResponse;
+import gift.service.ChatService;
 
 import javax.validation.Valid;
 
