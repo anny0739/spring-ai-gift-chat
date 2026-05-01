@@ -33,6 +33,8 @@ dependencies {
     implementation(platform("org.springframework.ai:spring-ai-bom:1.1.4"))
     implementation("org.springframework.ai:spring-ai-starter-model-google-genai")
 
+    implementation ("org.springaicommunity:claude-code-sdk:1.0.0")
+
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
