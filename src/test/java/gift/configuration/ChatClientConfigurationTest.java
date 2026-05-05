@@ -3,6 +3,7 @@ package gift.configuration;
 import gift.client.ClaudeLLMChatClient;
 import gift.client.GoogleLLMChatClient;
 import gift.client.LLMChatClient;
+import gift.prompt.SystemPromptHolder;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
@@ -14,7 +15,8 @@ import static org.mockito.Mockito.mock;
 class ChatClientConfigurationTest {
     private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
             .withUserConfiguration(ChatClientConfiguration.class)
-            .withBean(ChatClient.Builder.class, () -> mock(ChatClient.Builder.class, RETURNS_DEEP_STUBS));
+            .withBean(ChatClient.Builder.class, () -> mock(ChatClient.Builder.class, RETURNS_DEEP_STUBS))
+            .withBean(SystemPromptHolder.class);
 
     @Test
     void google_프로바이더_설정시_GoogleLlmChatClient가_등록된다() {

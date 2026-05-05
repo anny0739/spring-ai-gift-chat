@@ -5,13 +5,14 @@ import org.springframework.ai.chat.client.ChatClient;
 public class GoogleLLMChatClient implements LLMChatClient {
     private final ChatClient chatClient;
 
-    public GoogleLLMChatClient(ChatClient.Builder builder) {
-        this.chatClient = builder.build();
+    public GoogleLLMChatClient(ChatClient.Builder builder, String systemPrompt) {
+        this.chatClient = builder
+                .defaultSystem(systemPrompt)
+                .build();
     }
     @Override
-    public String chat(String systemPrompt, String userMessage) {
+    public String chat(String userMessage) {
         return chatClient.prompt()
-                .system(systemPrompt)
                 .user(userMessage)
                 .call()
                 .content();

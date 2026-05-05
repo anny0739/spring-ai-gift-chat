@@ -2,7 +2,6 @@ package gift.service;
 
 import gift.client.LLMChatClient;
 import gift.exception.ChatException;
-import gift.prompt.SystemPromptHolder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,13 +25,9 @@ class ChatServiceTest {
 
     ChatService chatService;
 
-    @Mock
-    SystemPromptHolder holder;
-
     @BeforeEach
     void setUp() {
-        given(holder.get()).willReturn("당신은 선물 추천 도우미입니다.");
-        chatService = new ChatService(llmChatClient, holder);
+        chatService = new ChatService(llmChatClient);
     }
 
     @Test
@@ -41,7 +36,7 @@ class ChatServiceTest {
         final UUID sessionId = null;
         final String responseMessage = "추천 선물은 ...";
 
-        given(llmChatClient.chat(anyString(), anyString())).willReturn(responseMessage);
+        given(llmChatClient.chat(anyString())).willReturn(responseMessage);
 
         ChatResponse response = chatService.chat(message, sessionId);
 
@@ -53,7 +48,7 @@ class ChatServiceTest {
 
     @Test
     void LLM_호출_실패시_안내_메시지를_반환한다() {
-        given(llmChatClient.chat(anyString(), anyString())).willThrow(new TransientAiException("지연 발생"));
+        given(llmChatClient.chat(anyString())).willThrow(new TransientAiException("지연 발생"));
 
         assertThatThrownBy(() -> chatService.chat("test", null))
                 .isInstanceOf(ChatException.class)
@@ -62,16 +57,7 @@ class ChatServiceTest {
 
     @Test
     void LLM이_null을_반환하면_ChatException을_던진다() {
-        given(llmChatClient.chat(anyString(), anyString())).willReturn(null);
-
-        assertThatThrownBy(() -> chatService.chat("test", null))
-                .isInstanceOf(ChatException.class)
-                .hasMessage(ERROR_MESSAGE);
-    }
-
-    @Test
-    void LLM_호출_실패시_ChatException을_던진다() {
-        given(llmChatClient.chat(anyString(), anyString())).willThrow(new TransientAiException("지연 발생"));
+        given(llmChatClient.chat(anyString())).willReturn(null);
 
         assertThatThrownBy(() -> chatService.chat("test", null))
                 .isInstanceOf(ChatException.class)

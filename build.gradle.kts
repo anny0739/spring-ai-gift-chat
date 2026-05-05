@@ -25,6 +25,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -33,7 +34,7 @@ dependencies {
     implementation(platform("org.springframework.ai:spring-ai-bom:1.1.4"))
     implementation("org.springframework.ai:spring-ai-starter-model-google-genai")
 
-    implementation ("org.springaicommunity:claude-code-sdk:1.0.0")
+    implementation("org.springaicommunity:claude-code-sdk:1.0.0")
 
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")

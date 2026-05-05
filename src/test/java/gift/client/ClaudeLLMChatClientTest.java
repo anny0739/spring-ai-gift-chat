@@ -15,10 +15,11 @@ import static org.mockito.Mockito.mockStatic;
 class ClaudeLLMChatClientTest {
 
     ClaudeLLMChatClient claudeLLMChatClient;
+    private static final String SYSTEM_PROMPT = "SYSTEM_PROMPT";
 
     @BeforeEach
     void setup() {
-        claudeLLMChatClient = new ClaudeLLMChatClient();
+        claudeLLMChatClient = new ClaudeLLMChatClient(SYSTEM_PROMPT);
     }
 
     @Test
@@ -30,7 +31,7 @@ class ClaudeLLMChatClientTest {
             queryMock.when(() -> Query.text(eq(userMessage), any(QueryOptions.class)))
                     .thenReturn(expected);
 
-            assertThat(claudeLLMChatClient.chat("시스템 프롬프트", userMessage))
+            assertThat(claudeLLMChatClient.chat(userMessage))
                     .isEqualTo(expected);
         }
     }
@@ -41,7 +42,7 @@ class ClaudeLLMChatClientTest {
             queryMock.when(() -> Query.text(any(), any(QueryOptions.class)))
                     .thenReturn(null);
 
-            assertThat(claudeLLMChatClient.chat("prompt", "message")).isNull();
+            assertThat(claudeLLMChatClient.chat("message")).isNull();
         }
     }
 
@@ -51,7 +52,7 @@ class ClaudeLLMChatClientTest {
             queryMock.when(() -> Query.text(any(), any(QueryOptions.class)))
                     .thenThrow(new RuntimeException("CLI 오류"));
 
-            assertThatThrownBy(() -> claudeLLMChatClient.chat("prompt", "message"))
+            assertThatThrownBy(() -> claudeLLMChatClient.chat("message"))
                     .isInstanceOf(RuntimeException.class);
         }
     }
